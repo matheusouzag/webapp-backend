@@ -4,20 +4,20 @@ import { Transaction } from './Transaction';
 @Entity()
 export class Account {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  name: string;
+  name!: string;
 
   @Column()
-  type: string;
+  type!: string;
 
   @Column({ type: 'float', default: 0 })
-  balance: number;
+  balance!: number;
 
   @OneToMany(() => Transaction, transaction => transaction.accountOrigin)
-  outgoingTransactions: Transaction[];
+  outgoingTransactions!: Transaction[];
 
   @OneToMany(() => Transaction, transaction => transaction.accountDestination)
-  incomingTransactions: Transaction[];
+  incomingTransactions!: Transaction[];
 }
