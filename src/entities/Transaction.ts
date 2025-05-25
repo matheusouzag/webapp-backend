@@ -4,23 +4,23 @@ import { Account } from './Account';
 @Entity()
 export class Transaction {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  type: 'debito' | 'credito' | 'transferencia';
+  type!: 'debito' | 'credito' | 'transferencia';
 
   @Column({ type: 'float' })
-  value: number;
+  value!: number;
 
   @Column({ nullable: true })
-  description: string;
+  description!: string;
 
   @Column({ type: 'datetime' })
-  date: Date;
+  date!: Date;
 
   @ManyToOne(() => Account, account => account.outgoingTransactions, { nullable: true })
-  accountOrigin: Account;
+  accountOrigin!: Account;
 
   @ManyToOne(() => Account, account => account.incomingTransactions, { nullable: true })
-  accountDestination: Account;
+  accountDestination!: Account;
 }
