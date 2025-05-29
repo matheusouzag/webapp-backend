@@ -8,7 +8,6 @@ interface TransactionInput {
   type: TransactionType;
   value: number;
   description?: string;
-  date: Date;
   accountOriginId?: number;
   accountDestinationId?: number;
 }
@@ -18,13 +17,13 @@ export class TransactionService {
   private accountRepo = AppDataSource.getRepository(Account);
 
   async create(data: TransactionInput) {
-    const { type, value, date, description, accountOriginId, accountDestinationId } = data;
+    const { type, value, description, accountOriginId, accountDestinationId } = data;
 
     const transaction = new Transaction();
     transaction.type = type;
     transaction.value = value;
     transaction.description = description || '';
-    transaction.date = date;
+    transaction.date = new Date();
 
     if (type === 'debito') {
       if (!accountOriginId) throw new Error('Conta de origem obrigatória');
