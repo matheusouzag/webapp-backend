@@ -18,9 +18,21 @@ export class Transaction {
   @Column({ type: 'datetime' })
   date!: Date;
 
-  @ManyToOne(() => Account, account => account.outgoingTransactions, { nullable: true })
+  @Column({ nullable: true })
+  accountOriginName?: string;
+
+  @Column({ nullable: true })
+  accountDestinationName?: string;
+
+  @ManyToOne(() => Account, account => account.outgoingTransactions, {
+    nullable: true,
+    onDelete: 'SET NULL',
+  })
   accountOrigin!: Account;
 
-  @ManyToOne(() => Account, account => account.incomingTransactions, { nullable: true })
+@ManyToOne(() => Account, account => account.incomingTransactions, {
+    nullable: true,
+    onDelete: 'SET NULL',
+  })
   accountDestination!: Account;
 }

@@ -5,7 +5,7 @@ import { AppDataSource } from './database/data-source';
 import 'reflect-metadata';
 
 AppDataSource.initialize().then(() => {
-  console.log("Data Source has been initialized.");
+  console.log("Data Source inicializado!");
 });
 
 const app = express();
