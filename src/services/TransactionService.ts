@@ -30,6 +30,7 @@ export class TransactionService {
       const origin = await this.accountRepo.findOneByOrFail({ id: accountOriginId });
       origin.balance -= value;
       transaction.accountOrigin = origin;
+      transaction.accountOriginName = origin.name;
       await this.accountRepo.save(origin);
     }
 
@@ -38,6 +39,7 @@ export class TransactionService {
       const dest = await this.accountRepo.findOneByOrFail({ id: accountDestinationId });
       dest.balance += value;
       transaction.accountDestination = dest;
+      transaction.accountDestinationName = dest.name;
       await this.accountRepo.save(dest);
     }
 
@@ -51,6 +53,8 @@ export class TransactionService {
 
       transaction.accountOrigin = origin;
       transaction.accountDestination = dest;
+      transaction.accountOriginName = origin.name;
+      transaction.accountDestinationName = dest.name;
 
       await this.accountRepo.save(origin);
       await this.accountRepo.save(dest);
