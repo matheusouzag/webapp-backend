@@ -1,8 +1,8 @@
-# 💰 Gestor Financeiro Pessoal - Backend
+# 💰 Gestor Financeiro Pessoal - Back-end
 
 [Código Front-end](https://github.com/matheusouzag/webapp)
 
-Este é o backend da aplicação **Gestor Financeiro Pessoal**, desenvolvida como parte de um desafio técnico para avaliar habilidades em Node.js, Express, TypeORM, SQL, orientação a objetos, Clean Code e testes automatizados.
+Este é o back-end da aplicação **Gestor Financeiro Pessoal**, desenvolvida como parte de um desafio técnico para avaliar habilidades em Node.js, Express, TypeORM, SQL, orientação a objetos, Clean Code e testes automatizados.
 
 ## 📌 Objetivo
 
@@ -12,7 +12,7 @@ A aplicação permite o gerenciamento de contas bancárias e o registro de trans
 
 ## 🏗️ Arquitetura e Estrutura
 
-O backend segue princípios de **Clean Architecture**, com separação clara entre camadas:
+O back-end segue princípios de **Clean Architecture**, com separação clara entre camadas:
 
 ```
 ├── src/
