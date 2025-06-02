@@ -12,13 +12,13 @@ A aplicação permite o gerenciamento de contas bancárias e o registro de trans
 
 O backend segue princípios de **Clean Architecture** e **SOLID**, com separação clara entre camadas:
 
-- src/
-- controllers/ # Controladores das rotas HTTP
-- services/ # Lógica de negócio central
-- entities/ # Entidades do TypeORM (modelos do banco)
-- database/ # Configuração do banco de dados
-- routes/ # Módulo de rotas agrupadas
-- server.ts # Inicialização do servidor
+src/
+- controllers/ Controladores das rotas HTTP
+- services/ Lógica de negócio central
+- entities/ Entidades do TypeORM (modelos do banco)
+- database/ Configuração do banco de dados
+- routes/ Módulo de rotas agrupadas
+- server.ts Inicialização do servidor
 
 ---
 
