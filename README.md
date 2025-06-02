@@ -6,21 +6,42 @@ Este é o backend da aplicação **Gestor Financeiro Pessoal**, desenvolvida com
 
 ## 📌 Objetivo
 
-A aplicação permite o gerenciamento de contas bancárias e o registro de transações financeiras (crédito, débito e transferência), com operações completas de CRUD (criação, leitura, atualização e exclusão) via API RESTful.
+A aplicação permite o gerenciamento de contas bancárias e o registro de transações financeiras (crédito, débito e transferência), com operações completas de CRUD (criação, leitura, atualização e exclusão).
 
 ---
 
 ## 🏗️ Arquitetura e Estrutura
 
-O backend segue princípios de **Clean Architecture** e **SOLID**, com separação clara entre camadas:
+O backend segue princípios de **Clean Architecture**, com separação clara entre camadas:
 
-src/
-- controllers/ Controladores das rotas HTTP
-- services/ Lógica de negócio central
-- entities/ Entidades do TypeORM (modelos do banco)
-- database/ Configuração do banco de dados
-- routes/ Módulo de rotas agrupadas
-- server.ts Inicialização do servidor
+```
+├── src/
+│   ├── controllers/         
+│   │   ├── AccountController.ts
+│   │   └── TransactionController.ts
+│   │
+│   ├── entities/            
+│   │   ├── Account.ts
+│   │   └── Transaction.ts
+│   │
+│   ├── repositories/        
+│   │   ├── AccountRepository.ts
+│   │   └── TransactionRepository.ts
+│   │
+│   ├── services/            
+│   │   ├── AccountService.ts
+│   │   └── TransactionService.ts
+│   │
+│   ├── routes/              
+│   │   └── index.ts
+│   │
+│   ├── database/            
+│   │   └── data-source.ts
+│   │
+│   ├── tests/               
+│       ├── backend.test.ts
+│       └── TransactionService.test.ts
+```
 
 ---
 
@@ -51,15 +72,14 @@ src/
   - **Débito**: subtrai valor da conta de origem.
   - **Transferência**: subtrai de uma conta e adiciona à outra.
 - Listar todas as transações registradas.
-- (Opcional) Filtrar por conta ou período.
 
 ---
 
 ## 💡 Decisões de Arquitetura
 
-- **TypeORM**: Escolhido por sua forte integração com TypeScript, tipagem estática e suporte direto a SQLite, além da facilidade de migrations e repositórios.
+- **TypeORM**: Forte integração com TypeScript, tipagem estática e suporte direto a SQLite, além da facilidade de migrations e repositórios.
 - **Camada de serviço (Service Layer)**: Centraliza toda a lógica de negócio, separando-a dos controladores. Isso facilita testes unitários e manutenção.
-- **SQLite**: Ideal para desafios locais e fácil de configurar sem necessidade de instalação externa.
+- **SQLite**: Ideal para projetos locais e fácil de configurar sem necessidade de instalação externa.
 - **Jest + Mocks**: Para garantir testes rápidos e isolados de regras de negócio, sem dependência do banco de dados real.
 
 ---
@@ -75,7 +95,7 @@ src/
 - **Créditos**:
   - Apenas adiciona o valor na conta de destino.
 - **Atualização de Saldo**:
-  - Toda operação de transação atualiza diretamente o saldo da(s) conta(s) envolvidas.
+  - Toda operação de transação atualiza diretamente o saldo das contas envolvidas.
 
 ---
 
@@ -94,6 +114,27 @@ Testam o fluxo real:
 - Integração entre contas via transferências.
 - Testes usando `fetch` com o servidor Express real rodando.
 
+### ✅ Testes Unitários (AccountService.test.ts)
+Cobrem:
+- Criação e salvamento de contas utilizando mocks de repositório.
+- Listagem completa de contas cadastradas.
+- Atualização de conta com retorno da entidade atualizada.
+- Remoção de conta existente.
+
+### ✅ Testes Unitários (AccountController.test.ts)
+Cobrem:
+- Criação de conta via POST /accounts, com status 201 e JSON de retorno.
+- Tratamento de erro na criação de conta.
+- Listagem de contas com status 200.
+- Atualização de conta com PUT /accounts/:id.
+- Remoção de conta com DELETE /accounts/:id e retorno 204.
+
+### ✅ Testes Unitários (TransactionController.test.ts)
+Cobrem:
+- Criação de transação via POST /transactions, com retorno 201.
+- Tratamento de erro ao criar transação inválida.
+- Listagem de transações cadastradas com retorno 200.
+
 ## ▶️ Instruções para Executar Localmente
 
 1. Clone o repositório
@@ -102,7 +143,7 @@ git clone https://github.com/matheusouzag/webapp-backend.git
 ```
 2. Acesse a pasta
 ```bash
-cd gestor-financeiro
+cd webapp-backend
 ```
 3. Instale as dependências
 ```bash
@@ -112,7 +153,7 @@ npm install
 ```bash
 npm run dev
 ```
-Para rodar os testes:
+5. Para rodar os testes:
 ```bash
 npm test
 ```
@@ -147,5 +188,9 @@ npm test
 - ✅ Estrutura orientada a objetos e modular  
 - ✅ Clean Code em todo o backend  
 - ✅ Testes unitários e de integração com Jest  
-- ✅ Documentação clara e completa  
+- ✅ Documentação clara e completa
+
+---
+
+🌐 O back-end está rodando localmente em: [http://localhost:3001](http://localhost:3001)
 
